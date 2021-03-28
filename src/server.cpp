@@ -27,8 +27,8 @@ int main(){
     std::cerr << "Error in listener.\n";
   }
 
-  sf::TcpSocket Server;
-  if(listener.accept(Server) != sf::Socket::Done){
+  sf::TcpSocket Client;
+  if(listener.accept(Client) != sf::Socket::Done){
     std::cerr << "Error listener can not accept socket.\n";
   }
 
@@ -38,12 +38,12 @@ int main(){
   data_pack << data;
 
   std::cout << "Sending data bot...\n";
-  Server.send(data_pack);
+  Client.send(data_pack);
 
   std::cout << "Receiving order...\n";
   char buffer[50];
   std::size_t received_size;
-  Server.receive(buffer, sizeof(buffer), received_size);
+  Client.receive(buffer, sizeof(buffer), received_size);
   std::cout << buffer << std::endl;
   std::cout << "Parsing order...\n";
   return 0;
